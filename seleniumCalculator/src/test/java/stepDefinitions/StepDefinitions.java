@@ -1,10 +1,15 @@
 package stepDefinitions;
 
 import static org.junit.Assert.assertEquals;
+
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 //import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
@@ -39,7 +44,18 @@ public class StepDefinitions {
 		}
 		@When("I press add")
 		public void i_press_add() throws InterruptedException {
-			driver.findElement(By.xpath("//input[@type='button']")).click();
+			//driver.findElement(By.xpath("//input[@type='button']")).click();
+			//driver.findElement(By.cssSelector("input[type=button]")).click();
+			click(driver, By.cssSelector("input[type=button]"));
+			
+			/*List<WebElement> elements = driver.findElements(By.className("regfont"));
+
+					for(WebElement e : elements) {
+						System.out.println(e.getAttribute("name"));
+			
+			List<WebElement> elements = driver.findElements(By.tagName("input"));
+			System.out.println("Hur många inputs finns det?" + elements.size());*/
+					
 		}
 		
 		@Then("the result should be {int} on the screen")
@@ -49,7 +65,11 @@ public class StepDefinitions {
 			Thread.sleep(2000);
 			driver.quit();
 		}
-
+		
+		private void click(WebDriver driver, By by) {
+			(new WebDriverWait(driver, 1)).until(ExpectedConditions.elementToBeClickable(by));
+			driver.findElement(by).click();
+		}
 
 
 
