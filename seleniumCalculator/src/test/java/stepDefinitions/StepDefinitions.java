@@ -29,8 +29,6 @@ public class StepDefinitions {
 	    //Thread.sleep(5000);
 	}
 		
-
-
 		@Given("I have entered {int} into the calculator")
 		public void i_have_entered_into_the_calculator(Integer int1) throws InterruptedException {
 		    WebElement addFirst = driver.findElement(By.name("n01")); // Nummer 1
